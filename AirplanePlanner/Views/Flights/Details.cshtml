@@ -1,18 +1,16 @@
 @using AirplanePlanner.Models;
-
-<h1>To Do List</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<h1>Airline</h1>
 <h2>Flight: @Model["selectedFlight"].GetName()</h2>
 <hr />
 @if (@Model["flightCities"].Count != 0)
 {
   <h4>Here are all the cities in this flight:</h4>
-  <ul>
     @foreach (var city in @Model["flightCities"])
     {
-      <li>@city.GetDescription()</li>
-      
+      <p>@city.GetDescription()</p>
+
     }
-  </ul>
 }
 <h4>Add a city to this flight:</h4>
 <form action='/flights/@Model["selectedFlight"].GetId()/cities/new' method='post'>
