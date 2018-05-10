@@ -4,15 +4,16 @@
 <h2>Flights:</h2>
 @if (Model.Count != 0)
 {
-  <ul>
+
     @foreach (var flight in Model)
     {
-      <li><a href="/flights/@flight.GetId()">@flight.GetName() -- Status @flight.GetStatus()</a></li>
+      <p><a href="/flights/@flight.GetId()">@flight.GetName()</a></p>
+
       <form action='/flights/@flight.GetId()/delete' method="post">
-            <button class="btn" type="submit">Delete Flight</button>
+            <button class="btn btn-primary" type="submit">Delete Flight</button>
             </form>
     }
-  </ul>
+
 }
 
 <h4><a href="/flights/new">Add a new flight</a></h4>

@@ -10,8 +10,10 @@
     {
       <p>@city.GetDescription()</p>
 
+
     }
 }
+
 <h4>Add a city to this flight:</h4>
 <form action='/flights/@Model["selectedFlight"].GetId()/cities/new' method='post'>
   <label for='city-id'>Select a city</label>
@@ -19,6 +21,7 @@
     @foreach (var city in @Model["allCities"])
     {
       <option value='@city.GetId()'>@city.GetDescription()</option>
+
     }
   </select>
   <button type='submit'>Add</button>

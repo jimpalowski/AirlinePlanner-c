@@ -9,12 +9,18 @@ namespace AirplanePlanner.Models
   {
     private string _name;
     private string _status;
+    private int _time;
+    private string _departureCity;
+    private string _arrivalCity;
     private int _id;
     private List<City> _cities;
 
-    public Flight(string flightName, string flightStatus, int flight_id = 0)
+    public Flight(string flightName, int flightTime, string flightDeparture, string flightArrival, string flightStatus, int flight_id = 0)
     {
       _name = flightName;
+      _time = flightTime;
+      _departureCity = flightDeparture;
+      _arrivalCity = flightArrival;
       _status = flightStatus;
       _id = flight_id;
 
@@ -111,6 +117,18 @@ namespace AirplanePlanner.Models
     {
       return _status;
     }
+    public int GetTime()
+    {
+      return _time;
+    }
+    public string GetDepartureCity()
+    {
+      return _departureCity;
+    }
+    public string GetArrivalCity()
+    {
+      return _arrivalCity;
+    }
     public void SetId(int newId)
     {
       _id = newId;
@@ -164,8 +182,11 @@ namespace AirplanePlanner.Models
       {
         int flightId = rdr.GetInt32(0);
         string flightName = rdr.GetString(1);
+        int flightDepartureTime = rdr.GetInt32(2);
+        string flightDeparture = rdr.GetString(3);
+        string flightArrival = rdr.GetString(4);
         string flightStatus = rdr.GetString(5);
-        Flight newFlight = new Flight(flightName, flightStatus);
+        Flight newFlight = new Flight(flightName,flightDepartureTime, flightDeparture, flightArrival, flightStatus);
         newFlight.SetId(flightId);
         allFlights.Add(newFlight);
       }
@@ -192,6 +213,9 @@ namespace AirplanePlanner.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int flightId = 0;
       string flightName = "";
+      int flightDepartureTime = 0;
+      string flightDeparture = "";
+      string flightArrival = "";
       string flightStatus = "";
       //string itemDueDate = "";
       // We remove the line setting a itemCategoryId value here.
@@ -200,13 +224,16 @@ namespace AirplanePlanner.Models
       {
         flightId = rdr.GetInt32(0);
         flightName = rdr.GetString(1);
+        flightDepartureTime = rdr.GetInt32(2);
+        flightDeparture = rdr.GetString(3);
+        flightArrival = rdr.GetString(4);
         flightStatus = rdr.GetString(5);
     //    itemDueDate = rdr.GetString(2);
         // We no longer read the itemCategoryId here, either.
       }
 
       // Constructor below no longer includes a itemCategoryId parameter:
-      Flight newFlight = new Flight(flightName, flightStatus, flightId);
+      Flight newFlight = new Flight(flightName, flightDepartureTime, flightDeparture, flightArrival, flightStatus, flightId);
     //  newCategory.SetDate(ItemDueDate);
       conn.Close();
       if (conn != null)

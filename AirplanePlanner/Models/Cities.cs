@@ -136,8 +136,11 @@ namespace AirplanePlanner.Models
                 {
                     int thisFlightId = flightQueryRdr.GetInt32(0);
                     string flightName = flightQueryRdr.GetString(1);
+                    int flightDepartureTime = flightQueryRdr.GetInt32(2);
+                    string flightDeparture = flightQueryRdr.GetString(3);
+                    string flightArrival = flightQueryRdr.GetString(4);
                     string flightStatus = flightQueryRdr.GetString(5);
-                    Flight foundFlight = new Flight(flightName, flightStatus, thisFlightId);
+                    Flight foundFlight = new Flight(flightName, flightDepartureTime, flightDeparture, flightArrival, flightStatus, thisFlightId);
                     flights.Add(foundFlight);
                 }
                 flightQueryRdr.Dispose();

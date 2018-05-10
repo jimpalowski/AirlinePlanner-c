@@ -12,7 +12,7 @@ namespace AirplanePlanner.Controllers
       [HttpGet("/flights")]
        public ActionResult Index()
        {
-           List<Flight> allFlights = Flight.GetAll();
+            List<Flight> allFlights = Flight.GetAll();
            return View(allFlights);
        }
        [HttpGet("/flights/new")]
@@ -23,7 +23,7 @@ namespace AirplanePlanner.Controllers
         [HttpPost("/flights")]
         public ActionResult Create()
         {
-            Flight newFlight = new Flight(Request.Form["flight-name"], "OnTime");
+            Flight newFlight = new Flight(Request.Form["flight-name"],45 , "DepartureCity", "ArrivalCity", "OnTime");
             newFlight.Save();
             return RedirectToAction("Success", "Home");
         }
