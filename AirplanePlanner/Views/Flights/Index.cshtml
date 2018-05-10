@@ -6,7 +6,7 @@
   <ul>
     @foreach (var flight in Model)
     {
-      <li><a href="/flights/@flight.GetId()">@flight.GetName()</a></li>
+      <li><a href="/flights/@flight.GetId()">@flight.GetName() -- Status @flight.GetStatus()</a></li>
       <form action='/flights/@flight.GetId()/delete' method="post">
             <button class="btn" type="submit">Delete Flight</button>
             </form>

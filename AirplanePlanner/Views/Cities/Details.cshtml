@@ -9,7 +9,8 @@
   <ul>
     @foreach (Flight flight in @Model["cityFlights"])
     {
-      <li>@flight.GetName()</li>
+      <li>@flight.GetName() -- @flight.GetStatus()</li>
+
     }
   </ul>
 }

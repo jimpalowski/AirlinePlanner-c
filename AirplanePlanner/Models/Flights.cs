@@ -8,13 +8,16 @@ namespace AirplanePlanner.Models
   public class Flight
   {
     private string _name;
+    private string _status;
     private int _id;
     private List<City> _cities;
 
-    public Flight(string flightName, int flight_id = 0)
+    public Flight(string flightName, string flightStatus, int flight_id = 0)
     {
       _name = flightName;
+      _status = flightStatus;
       _id = flight_id;
+
     }
 
     public override bool Equals(System.Object otherFlight)
@@ -28,6 +31,7 @@ namespace AirplanePlanner.Models
         Flight newFlight = (Flight) otherFlight;
         bool idEquality = this.GetId() == newFlight.GetId();
         bool nameEquality = this.GetName() == newFlight.GetName();
+
         return (idEquality && nameEquality);
       }
     }
@@ -69,60 +73,6 @@ namespace AirplanePlanner.Models
               }
               return cities;
           }
-          //Old Get Items without Join
-//           public List<Item> GetItems()
-// {
-//     MySqlConnection conn = DB.Connection();
-//     conn.Open();
-//     var cmd = conn.CreateCommand() as MySqlCommand;
-//     cmd.CommandText = @"SELECT item_id FROM categories_items WHERE category_id = @CategoryId;";
-//
-//     MySqlParameter categoryIdParameter = new MySqlParameter();
-//     categoryIdParameter.ParameterName = "@CategoryId";
-//     categoryIdParameter.Value = _id;
-//     cmd.Parameters.Add(categoryIdParameter);
-//
-//     var rdr = cmd.ExecuteReader() as MySqlDataReader;
-//
-//     List<int> itemIds = new List<int> {};
-//     while(rdr.Read())
-//     {
-//         int itemId = rdr.GetInt32(0);
-//         itemIds.Add(itemId);
-//     }
-//     rdr.Dispose();
-//
-//     List<Item> items = new List<Item> {};
-//     foreach (int itemId in itemIds)
-//     {
-//         var itemQuery = conn.CreateCommand() as MySqlCommand;
-//         itemQuery.CommandText = @"SELECT * FROM items WHERE id = @ItemId;";
-//
-//         MySqlParameter itemIdParameter = new MySqlParameter();
-//         itemIdParameter.ParameterName = "@ItemId";
-//         itemIdParameter.Value = itemId;
-//         itemQuery.Parameters.Add(itemIdParameter);
-//
-//         var itemQueryRdr = itemQuery.ExecuteReader() as MySqlDataReader;
-//         while(itemQueryRdr.Read())
-//         {
-//             int thisItemId = itemQueryRdr.GetInt32(0);
-//             string itemDescription = itemQueryRdr.GetString(1);
-//             Item foundItem = new Item(itemDescription, thisItemId);
-//             items.Add(foundItem);
-//         }
-//         itemQueryRdr.Dispose();
-//     }
-//     conn.Close();
-//     if (conn != null)
-//     {
-//         conn.Dispose();
-//     }
-//     return items;
-// }
-
-
-
 
     public void AddCity(City newCity)
         {
@@ -157,7 +107,10 @@ namespace AirplanePlanner.Models
     {
       return _id;
     }
-
+    public string GetStatus()
+    {
+      return _status;
+    }
     public void SetId(int newId)
     {
       _id = newId;
@@ -211,7 +164,8 @@ namespace AirplanePlanner.Models
       {
         int flightId = rdr.GetInt32(0);
         string flightName = rdr.GetString(1);
-        Flight newFlight = new Flight(flightName);
+        string flightStatus = rdr.GetString(5);
+        Flight newFlight = new Flight(flightName, flightStatus);
         newFlight.SetId(flightId);
         allFlights.Add(newFlight);
       }
@@ -238,6 +192,7 @@ namespace AirplanePlanner.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int flightId = 0;
       string flightName = "";
+      string flightStatus = "";
       //string itemDueDate = "";
       // We remove the line setting a itemCategoryId value here.
 
@@ -245,12 +200,13 @@ namespace AirplanePlanner.Models
       {
         flightId = rdr.GetInt32(0);
         flightName = rdr.GetString(1);
+        flightStatus = rdr.GetString(5);
     //    itemDueDate = rdr.GetString(2);
         // We no longer read the itemCategoryId here, either.
       }
 
       // Constructor below no longer includes a itemCategoryId parameter:
-      Flight newFlight = new Flight(flightName, flightId);
+      Flight newFlight = new Flight(flightName, flightStatus, flightId);
     //  newCategory.SetDate(ItemDueDate);
       conn.Close();
       if (conn != null)

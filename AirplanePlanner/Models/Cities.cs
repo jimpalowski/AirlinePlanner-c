@@ -12,6 +12,7 @@ namespace AirplanePlanner.Models
         private bool _isDone;
         private int _id;
 
+
         // We no longer declare _categoryId here
 
         public City(string description, int id = 0, bool done = false)
@@ -135,7 +136,8 @@ namespace AirplanePlanner.Models
                 {
                     int thisFlightId = flightQueryRdr.GetInt32(0);
                     string flightName = flightQueryRdr.GetString(1);
-                    Flight foundFlight = new Flight(flightName, thisFlightId);
+                    string flightStatus = flightQueryRdr.GetString(5);
+                    Flight foundFlight = new Flight(flightName, flightStatus, thisFlightId);
                     flights.Add(foundFlight);
                 }
                 flightQueryRdr.Dispose();

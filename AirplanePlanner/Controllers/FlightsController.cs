@@ -23,25 +23,11 @@ namespace AirplanePlanner.Controllers
         [HttpPost("/flights")]
         public ActionResult Create()
         {
-            Flight newFlight = new Flight(Request.Form["flight-name"]);
+            Flight newFlight = new Flight(Request.Form["flight-name"], "OnTime");
             newFlight.Save();
             return RedirectToAction("Success", "Home");
         }
 
-      //  [HttpGet("/categories/new")]
-      //  public ActionResult CreateForm()
-      //  {
-      //      return View();
-      //  }
-       //
-      //  [HttpPost("/categories/new")]
-      //  public ActionResult Create()
-      //  {
-      //      Category newCategory = new Category(Request.Form["category-name"]);
-      //      newCategory.Save();
-      //      List<Category> allCategories = Category.GetAll();
-      //      return View("Index", allCategories);
-      //  }
 
       [HttpGet("/flights/{id}")]
       public ActionResult Details(int id)
