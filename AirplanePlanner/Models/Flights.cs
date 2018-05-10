@@ -244,7 +244,7 @@ namespace AirplanePlanner.Models
       return newFlight;
     }
 
-    public void Delete()
+    public static void Delete(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -252,7 +252,7 @@ namespace AirplanePlanner.Models
       MySqlCommand cmd = new MySqlCommand("DELETE FROM flights WHERE id = @FlightId; DELETE FROM cities_flights WHERE flight_id = @FlightId;", conn);
       MySqlParameter flightIdParameter = new MySqlParameter();
       flightIdParameter.ParameterName = "@FlightId";
-      flightIdParameter.Value = this.GetId();
+      flightIdParameter.Value = id;
 
       cmd.Parameters.Add(flightIdParameter);
       cmd.ExecuteNonQuery();

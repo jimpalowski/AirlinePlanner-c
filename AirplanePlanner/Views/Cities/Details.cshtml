@@ -19,8 +19,10 @@
     @foreach (var flight in @Model["allFlights"])
     {
       <option value='@flight.GetId()'>@flight.GetName()</option>
+
     }
   </select>
   <button type='submit'>Add</button>
 </form>
+  <p><a href="/cities/{cityId}/update">Update Cities</a></p>
 <p><a href="/">Return to Main Page.</a></p>

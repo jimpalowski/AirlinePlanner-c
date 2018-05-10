@@ -66,12 +66,12 @@ namespace AirplanePlanner.Controllers
             flight.AddCity(city);
             return RedirectToAction("Details",  new { id = flightId });
         }
-      //  [HttpPost("/items/{id}/update")]
-      //  public ActionResult Update(int id)
-      //  {
-      //      Item thisItem = Item.Find(id);
-      //      thisItem.Edit(Request.Form["newname"]);
-      //      return RedirectToAction("Details");
-      //  }
+        [HttpPost("/flights/{id}/delete")]
+         public ActionResult DeleteFlight(int id)
+         {
+         Flight.Delete(id);
+         return RedirectToAction("Details", "Cities", new { id = id });
+         }
+
     }
 }

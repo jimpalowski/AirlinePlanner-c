@@ -75,12 +75,19 @@ namespace AirplanePlanner.Controllers
             City thisCity = City.Find(id);
             return View(thisCity);
         }
+        [HttpPost("/cities/{id}/update")]
+        public ActionResult Update(int id)
+        {
+            City thisCity = City.Find(id);
+            thisCity.Edit(Request.Form["newname"]);
+            return RedirectToAction("Details");
+        }
 
-        [HttpPost("/flights/{id}/delete")]
-         public ActionResult DeleteCity(int id)
-         {
-             City.Delete(id);
-             return RedirectToAction("Details", "Flights", new { id = id });
-         }
+        // [HttpPost("/flights/{id}/delete")]
+        //  public ActionResult DeleteCity(int id)
+        //  {
+        //      City.Delete(id);
+        //      return RedirectToAction("Details", "Flights", new { id = id });
+        //  }
     }
 }
