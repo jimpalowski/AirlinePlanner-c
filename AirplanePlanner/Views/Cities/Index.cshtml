@@ -7,8 +7,12 @@
     @foreach (var city in Model)
     {
       <p><a href='/cities/@city.GetId()'>@city.GetDescription()</a></p>
+      <form action='/cities/@city.GetId()/delete' method="post">
+            <button class="btn btn-primary" type="submit">Delete City</button>
+            </form>
     }
 
 }
+
 <h4><a href="/cities/new">Add new city</a></h4>
 <h4><a href="/">Return home</a></h4>

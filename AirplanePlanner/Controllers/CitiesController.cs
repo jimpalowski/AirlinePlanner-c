@@ -82,12 +82,18 @@ namespace AirplanePlanner.Controllers
             thisCity.Edit(Request.Form["newname"]);
             return RedirectToAction("Details");
         }
-
-        // [HttpPost("/flights/{id}/delete")]
-        //  public ActionResult DeleteCity(int id)
-        //  {
-        //      City.Delete(id);
-        //      return RedirectToAction("Details", "Flights", new { id = id });
-        //  }
+        // [HttpGet("/cities/{id}/delete")]
+        // public ActionResult Delete(int id)
+        // {
+        //   City thisCity = City.Find(id);
+        //   thisCity.Delete();
+        //   return RedirectToAction("Details");
+        // }
+        [HttpPost("/cities/{id}/delete")]
+         public ActionResult DeleteCity(int id)
+         {
+             City.Delete(id);
+             return RedirectToAction("Details", "Cities", new { id = id });
+         }
     }
 }
