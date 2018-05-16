@@ -1,6 +1,6 @@
 ### _AirplanePlanner#_
 ### Version 1.0
-#### By: Rio Atmadja
+#### By: Jim Palowski
 #### Date: 07 April 2018
 
 ##### Description
@@ -36,5 +36,5 @@ _If you run into a problem, contact us at abc@epicodus.com_
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-* Copyright (c) 2018 _rio atmadja@epicodus_
+* Copyright (c) 2018 _jim palowski@epicodus_
 ####
